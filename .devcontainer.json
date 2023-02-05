@@ -1,0 +1,27 @@
+{
+    //"image": "ubuntu:latest",
+    "image": "docker.io/library/avr-ubuntu:0.0.1",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+
+    "customizations": {
+        "vscode": {
+          "extensions": [
+            "eamodio.gitlens",
+            "llvm-vs-code-extensions.vscode-clangd",
+            "zchrissirhcz.cmake-highlight",
+            "ms-vscode.cpptools",
+            "ms-vscode.cpptools-extension-pack"
+
+        ]
+        }
+    },
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}",
+            "target": "/workspace",
+            "type": "bind"
+        }
+    ]
+}
