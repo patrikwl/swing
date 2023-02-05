@@ -1,0 +1,15 @@
+## Start container interactively
+docker run -ti -v /home/azur/source/swing/src:/workplace/swing ubuntu /bin/bash
+
+## install cmake
+apt-get update
+apt -y install cmake
+
+## install AVR stuff
+apt-get -y install gcc-avr avr-libc 
+
+## install SimAVR
+apt-get -y install simavr
+
+## install AVR-GDB
+apt-get install -y gdb-avr
