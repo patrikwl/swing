@@ -4,13 +4,15 @@
  * Created: 2020-11-03 12:29:04
  * Author : patrik	
  */ 
-#define F_CPU 8000000UL //1MHz standard
+//#define F_CPU 8000000UL //1MHz standard
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include <util/delay.h>
+
+#include "../lib/lcd.h"
 
 #define SPI_DDR DDRB
 #define CS      PINB2
@@ -34,7 +36,6 @@
 #define BAUD_RATE 1 //12
 
 
-
 //#include "lcd.h"
 
 volatile uint8_t x0; //LSBy
@@ -42,7 +43,6 @@ volatile uint8_t x1; //MSBy
 volatile uint8_t r_data;
 volatile int16_t x_out;
 volatile uint8_t i =0;
-volatile uint8_t r_data;
 
 uint8_t SPI_masterTxRx(uint8_t data)
 {
@@ -64,12 +64,15 @@ ISR (INT1_vect){
 	//x1 = SPI_masterTxRx(0xFF);
 	//SPI_DDR |= (1 << CS);
 	PORTB |= (1 << CS);
+	
 	/*_delay_ms(1);
 	PORTB &= ~(1 << CS);
 	//SPI_DDR &= ~(1 << CS);
 	SPI_masterTxRx(INT_SOURCE);
 	SPI_masterTxRx(0xFF);
 	PORTB |= (1 << CS);
+
+	
 	*/
 	//UCSR0A &= ~(1<<FE0)|~(1<<DOR0)|~(1<<UPE0); //?????????????????
 	x_out = (x1 << 8) | x0;
@@ -210,12 +213,15 @@ int main(void)
 	SPI_masterTxRx(0xFF);
 	SPI_masterTxRx(0xFF);
 	PORTB |= (1 << CS);
+	
 
 	while(1){
 	PORTB |= (1<<PB0); //LED ON
 	_delay_ms(1000);	
 	PORTB &= ~(1<<PB0); //LED OFF
-	_delay_ms(1000);	
+	_delay_ms(1000);
+	uint8_t asd = 6;
+	lcd_putc(static_cast<char>(asd));	
 	}
 	// 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
 }
