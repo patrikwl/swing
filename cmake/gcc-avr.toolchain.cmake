@@ -22,6 +22,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR avr)
 set(CMAKE_CROSS_COMPILING 1)
 
+
 set(CMAKE_C_COMPILER   "${TOOLCHAIN_ROOT}/${TRIPLE}-gcc${OS_SUFFIX}"     CACHE PATH "gcc"     FORCE)
 set(CMAKE_CXX_COMPILER "${TOOLCHAIN_ROOT}/${TRIPLE}-g++${OS_SUFFIX}"     CACHE PATH "g++"     FORCE)
 set(CMAKE_AR           "${TOOLCHAIN_ROOT}/${TRIPLE}-ar${OS_SUFFIX}"      CACHE PATH "ar"      FORCE)
@@ -101,7 +102,7 @@ function(add_avr_executable EXECUTABLE_NAME)
 	set(lst_file ${EXECUTABLE_NAME}_${AVR_MCU}.lst)
     set(eeprom_image ${EXECUTABLE_NAME}_${AVR_MCU}-eeprom.hex)
 
-    
+
 	# add elf target
 	add_executable(${elf_file} ${ARGN})
 
@@ -122,7 +123,7 @@ function(add_avr_executable EXECUTABLE_NAME)
             ${AVR_SIZE} ${AVR_SIZE_ARGS} ${elf_file}
         DEPENDS ${elf_file}
     )
-    
+
     # generate the lst file
     add_custom_command(
     OUTPUT ${lst_file}
@@ -169,14 +170,14 @@ function(add_avr_executable EXECUTABLE_NAME)
            -P ${AVR_UPLOADTOOL_PORT}
         DEPENDS ${hex_file}
         COMMENT "Uploading ${hex_file} to ${AVR_MCU} using ${AVR_PROGRAMMER}"
-     )  
+     )
 
    # disassemble
    add_custom_target(
       disassemble_${EXECUTABLE_NAME}
       ${AVR_OBJDUMP} -h -S ${elf_file} > ${EXECUTABLE_NAME}.lst
       DEPENDS ${elf_file}
-   )   
+   )
 
 endfunction(add_avr_executable)
 
@@ -193,7 +194,7 @@ function(add_avr_library LIBRARY_NAME)
     set_target_properties(
             ${lib_file}
             PROPERTIES
-            COMPILE_FLAGS "-mmcu=${AVR_MCU}"
+            COMPILE_FLAGS "-mmcu=${AVR_MCU} -std=c++14"
             OUTPUT_NAME "${lib_file}"
     )
 
@@ -264,7 +265,7 @@ function(avr_generate_fixed_targets)
       ${AVR_UPLOADTOOL} ${AVR_UPLOADTOOL_BASE_OPTIONS} -P ${AVR_UPLOADTOOL_PORT} -n -v
       COMMENT "Get status from ${AVR_MCU}"
    )
-   
+
    # get fuses
    add_custom_target(
       get_fuses
@@ -273,7 +274,7 @@ function(avr_generate_fixed_targets)
          -U hfuse:r:-:b
       COMMENT "Get fuses from ${AVR_MCU}"
    )
-   
+
    # set fuses
    add_custom_target(
       set_fuses
@@ -282,7 +283,7 @@ function(avr_generate_fixed_targets)
          -U hfuse:w:${AVR_H_FUSE}:m
          COMMENT "Setup: High Fuse: ${AVR_H_FUSE} Low Fuse: ${AVR_L_FUSE}"
    )
-   
+
    # get oscillator calibration
    add_custom_target(
       get_calibration
@@ -290,7 +291,7 @@ function(avr_generate_fixed_targets)
          -U calibration:r:${AVR_MCU}_calib.tmp:r
          COMMENT "Write calibration status of internal oscillator to ${AVR_MCU}_calib.tmp."
    )
-   
+
    # set oscillator calibration
    add_custom_target(
       set_calibration
