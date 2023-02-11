@@ -10,10 +10,11 @@ RUN apt-get update \
 
     gdb-avr \ 
     libelf-dev \
-    #binutils
 
-    avrdude
-    libusb
+    avrdude\
+    libusb\
+
+    simavr
 
 RUN mkdir /workspace
 WORKDIR /workspace
