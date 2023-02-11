@@ -1,0 +1,10 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 3
+TabWidth: 3
+IndentCaseLabels: true
+AllowShortIfStatementsOnASingleLine: false
+BreakBeforeBraces: Stroustrup
+ColumnLimit: 130
+...

@@ -6,4 +6,3 @@ add_avr_library(
    lcd.h
    lcd.c
 )
-
