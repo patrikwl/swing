@@ -3,19 +3,29 @@ FROM ubuntu
 
 RUN apt-get update \
     && apt-get install -y \
+
+    wget \
+    vim \
+    clangd \
+    clang-format \
     git \
+
     cmake \
     gcc-avr \
     avr-libc \
 
-    gdb-avr \ 
+    gdb-avr \
     libelf-dev \
 
-    avrdude\
-    libusb\
+    avrdude \
+    #libusb
+    python3 \
+    python3-pip
 
-    simavr
+RUN pip3 install pre-commit
+RUN git config --global core.editor vim
 
+    #simavr
+#TODO add non-root user
 RUN mkdir /workspace
 WORKDIR /workspace
-
