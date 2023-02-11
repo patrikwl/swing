@@ -6,7 +6,9 @@ apt-get update
 apt -y install cmake
 
 ## install AVR stuff
-apt-get -y install gcc-avr avr-libc 
+apt-get -y install gcc-avr avr-libc
+
+binutils
 
 ## install SimAVR
 apt-get -y install simavr

@@ -9,8 +9,10 @@ RUN apt-get update \
     clangd \
     clang-format \
     git \
+    libgtest-dev \
 
     cmake \
+    ccache \
     gcc-avr \
     avr-libc \
 
