@@ -10,4 +10,4 @@ repos:
     hooks:
     -   id: clang-format
         args: [-i, --style=file]
-        files: "src/, test/"
+        files: "src/, test/, include/"
