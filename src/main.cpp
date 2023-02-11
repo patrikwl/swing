@@ -10,12 +10,12 @@
 int main(void)
 {
 
-	while(1){
-        PORTB |= (1<<PB0); //LED ON
-        _delay_ms(1000);
-        PORTB &= ~(1<<PB0); //LED OFF
-        _delay_ms(1000);
-        uint8_t asd = 6;
+	while(1) {
+		PORTB |= (1<<PB0); //LED ON
+		_delay_ms(1000);
+		PORTB &= ~(1<<PB0); //LED OFF
+		_delay_ms(1000);
+		uint8_t asd = 6;
 	}
 
 }
