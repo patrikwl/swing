@@ -1,21 +1,38 @@
-message(STATUS "Building tests")
-set(MY_TESTS test_swing)
+cmake_minimum_required(VERSION 3.22)
 
-add_executable(${MY_TESTS}
+message(STATUS "Building tests -------------- ${CMAKE_SOURCE_DIR} and ........... ${CMAKE_CURRENT_SOURCE_SIR}")
+
+set(PROJECT_NAME MY_TESTS)
+project(${PROJECT_NAME})
+
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(${PROJECT_NAME}
   main.cpp
   test_template.cpp
+  /workspaces/swing/src/something.cpp
+  /workspaces/swing/src/something.h
+
 )
 
-target_include_directories(${MY_TESTS}
+include_directories(/usr/include /workspaces/swing/src)
+
+target_include_directories(${PROJECT_NAME}
     PUBLIC
-        ${PROJECT_SOURCE_DIR}/src
-        "${CMAKE_CURRENT_SOURCE_SIR}"
-
+        ${CMAKE_SOURCE_DIR}
+        /workspaces/swing/src
+        ${GTEST_INCLUDE_DIR}
 )
 
-target_link_libraries(${MY_TESTS} PRIVATE ${TARGET_LIBRARY} gtest)
+target_link_libraries(${PROJECT_NAME}
+  PRIVATE
+  ${GTEST_LIBRARIES}
+)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bins)
 
-include(GoogleTest)
+add_test(
+  NAME ${PROJECT_NAME}
+  COMMAND ${PROJECT_NAME}
+)
 #gtest_discover_tests(hello_test)
