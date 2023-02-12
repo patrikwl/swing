@@ -1,15 +1,4 @@
-set(AVR_MCU "atmega328p")
-set(MCU_SPEED "4000000UL")
 
-set(AVR_PROGRAMMER usbasp)
-set(AVR_UPLOADTOOL avrdude)
-set(AVR_UPLOADTOOL_BAUDRATE 9600)
-
-# Awesome fuse helper gui: https://www.engbedded.com/fusecalc/
-set(AVR_H_FUSE 0xd9)
-set(AVR_L_FUSE 0xc3)
-
-message(STATUS "AVR is set to: ${AVR}")
 
 
 #####################################################################
@@ -17,7 +6,16 @@ message(STATUS "AVR is set to: ${AVR}")
 #####################################################################
 add_avr_executable(${PROJECT_NAME}
    main.cpp
-   )
+   something.cpp
+
+)
+
+avr_target_include_directories(${PROJECT_NAME}
+   PRIVATE
+      ${PROJECT_SOURCE_DIR}/src
+      ${PROJECT_SOURCE_DIR}/include
+
+)
 
 
 
@@ -25,17 +23,34 @@ add_avr_executable(${PROJECT_NAME}
 # libraries to link to
 #####################################################################
 
-set(HDRS
-   something.h
-)
+# set(HDRS
+#    something.h
+# )
 
-set(SRC
-   something.cpp
-)
+# set(SRC
+#    main.cpp
+#    something.cpp
+# )
 
+# add_avr_library(${TARGET_LIBRARY} STATIC ${SRC} ${HDRS})
 
-add_avr_library(${TARGET_LIBRARY} STATIC ${SRC} ${HDRS})
+# target_include_directories(${TARGET_LIBRARY}
+#    PUBLIC
+#       ${PROJECT_SOURCE_DIR}/src
+# )
 
-avr_target_include_directories(${TARGET_LIBRARY} PUBLIC ${PROJECT_SOURCE_DIR}/src)
+# target_link_libraries(${TARGET_LIBRARY}
+#    PUBLIC
+#       ${PROJECT_SOURCE_DIR}/src
+# )
 
 target_sources(${PROJECT_NAME} PRIVATE ${SRC})
+
+avr_target_include_directories(${PROJECT_NAME}
+   PUBLIC
+      ${PROJECT_SOURCE_DIR}/src
+)
+
+
+# avr_target_link_libraries(${PROJECT_NAME} PRIVATE ${TARGET_LIBRARY})
+#target_link_libraries(${PROJECT_NAME}  PRIVATE ${TARGET_LIBRARY} )
