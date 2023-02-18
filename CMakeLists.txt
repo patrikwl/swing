@@ -74,26 +74,26 @@ add_definitions("-funsigned-bitfields")
 add_definitions("-ffunction-sections")
 add_definitions("-c")
 
-message(STATUS "AVR is se2222222t to: ${AVR}")
+# message(STATUS "AVR is se2222222t to: ${AVR}")
 
 ##########################################################################
 # include search paths
 ##########################################################################
-include_directories("${PROJECT_SOURCE_DIR}")
+# include_directories("${PROJECT_SOURCE_DIR}")
 
 ##########################################################################
 # building library and application in their subdirectories
 ##########################################################################
-set(TARGET_LIBRARY swing_static)
-add_subdirectory(src)
+# set(TARGET_LIBRARY swing_static)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
-message(STATUS "AVR is set to: ${AVR}")
+# message(STATUS "AVR is set to: ${AVR}")
 
-if (NOT AVR)
-message(STATUS "AVR is set to44444: ${AVR}")
-   enable_testing()
-   add_subdirectory(test)
-endif(NOT AVR)
+# if (NOT AVR)
+# message(STATUS "AVR is set to44444: ${AVR}")
+#    enable_testing()
+#    add_subdirectory(test)
+# endif(NOT AVR)
 
 
 
