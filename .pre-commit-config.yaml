@@ -10,3 +10,4 @@ repos:
     hooks:
     -   id: clang-format
         args: [-i, --style=file]
+        exclude: '.devcontainer.json'

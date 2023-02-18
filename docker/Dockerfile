@@ -15,6 +15,7 @@ RUN apt-get update \
     ccache \
     gcc-avr \
     avr-libc \
+    # binutils-avr \
 
     gdb-avr \
     libelf-dev \
