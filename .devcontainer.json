@@ -1,5 +1,5 @@
 {
-    "image": "docker.io/library/avr-ubuntu:0.0.2",
+    "image": "docker.io/library/avr-ubuntu:0.0.3",
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
     },
