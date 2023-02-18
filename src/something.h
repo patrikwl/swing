@@ -4,10 +4,10 @@
 #include "Isomething.h"
 
 class Something : public ISomething {
-    public:
-       Something();
-       virtual ~Something();
-       virtual uint8_t getInt() override;
+ public:
+   Something();
+   //    virtual ~Something();
+   virtual uint8_t getInt() override;
 };
 
 #endif
