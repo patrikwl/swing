@@ -1,9 +1,10 @@
 {
-    "image": "docker.io/library/avr-ubuntu:0.0.5",
+    "image": "docker.io/library/avr-ubuntu:0.0.6",
     "remoteUser": "dev",
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
     },
+    "runArgs": [ "--device=/dev/bus/usb/" ],
 
     "customizations": {
         "vscode": {
@@ -19,6 +20,11 @@
             "source": "${localWorkspaceFolder}",
             "target": "/workspace",
             "type": "bind"
+        },
+        {
+            "source" : "/dev/bus/usb",
+            "target" : "/dev/bus/usb",
+            "type" : "bind"
         }
     ]
 }

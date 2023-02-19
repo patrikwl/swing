@@ -8,6 +8,7 @@ RUN apt-get update \
     sudo \
     vim \
     clangd \
+    usbutils \
     clang-format \
     git \
     libgtest-dev \
