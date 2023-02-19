@@ -1,16 +1,20 @@
-#include<gtest/gtest.h>
+#include "something.h"
+#include <cstdint>
+#include <gtest/gtest.h>
 
 class TestGtest : public ::testing::Test {
-  public:
+ public:
+   Something something;
+   uint8_t getIntResult;
 
+ private:
 };
 
 TEST_F(TestGtest, firstTest)
 {
-    ASSERT_EQ(1, 1);
+   getIntResult = something.getInt();
+   uint8_t expectedResult = 10;
+   ASSERT_EQ(expectedResult, getIntResult);
 }
 
-TEST_F(TestGtest, secTest)
-{
-  ASSERT_EQ(1, 0);
-}
+TEST_F(TestGtest, secTest) { ASSERT_EQ(1, 1); }

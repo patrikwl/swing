@@ -24,3 +24,11 @@ https://learn.microsoft.com/en-us/windows/wsl/wsl-config for more examples
 
 ## clang formatter options
 https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+
+## Notes
+
+possibly add
+
+build-essential
+libstdc++-12-dev
