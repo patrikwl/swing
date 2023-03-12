@@ -12,3 +12,11 @@ avr_target_include_directories(${PROJECT_NAME}
       ${PROJECT_SOURCE_DIR}/src
       ${PROJECT_SOURCE_DIR}/include
 )
+
+include_directories(
+   include
+   SYSTEM
+      /usr/lib/avr/include
+)
+
+# set(CMAKE_VERBOSE_MAKEFILE ON)

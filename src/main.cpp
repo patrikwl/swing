@@ -12,11 +12,19 @@ extern "C" {
 #include <string.h>
 }
 
+ISR(INT1_vect)
+{
+   PORTB |= (1 << PB0); // LED ON
+   _delay_ms(1000);
+   PORTB &= ~(1 << PB0); // LED OFF ok
+   _delay_ms(1000);
+}
+
 int main(void)
 {
    Something something;
    lcd_init(LCD_DISP_ON);
-
+   sei();
    while (1) {
       PORTB |= (1 << PB0); // LED ON
       _delay_ms(1000);
