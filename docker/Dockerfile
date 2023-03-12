@@ -11,6 +11,7 @@ RUN apt-get update \
     usbutils \
     clang-format \
     git \
+    file \
     libgtest-dev \
 
     cmake \
@@ -35,6 +36,8 @@ RUN git config --global core.editor vim
 RUN useradd -ms /bin/bash dev
 RUN usermod -aG sudo dev && echo "dev ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/dev
 RUN chmod 0440 /etc/sudoers.d/dev
+RUN usermod -a -G dialout dev
+
 
 RUN mkdir /workspace
 WORKDIR /workspace
