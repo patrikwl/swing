@@ -3,6 +3,11 @@ cmake_minimum_required(VERSION 3.22)
 set(PROJECT_NAME MY_TESTS)
 project(${PROJECT_NAME})
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mtune=generic")
+
 set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
   "${CMAKE_SOURCE_DIR}/../src/something.h"
@@ -17,13 +22,16 @@ set(TARGET_LINUX_LIB swing_linux_static)
 
 
 add_library(${TARGET_LINUX_LIB} STATIC ${SRCS} ${HDRS})
+
 target_include_directories(${TARGET_LINUX_LIB}
   PRIVATE
-    "/usr/include"
-    "/usr/lib/avr/include"
+    /usr/lib/avr/include
+
 )
-
-
+include_directories(
+  SYSTEM
+    /usr/include/c++/11/
+)
 
 add_executable(${PROJECT_NAME}
   main.cpp
@@ -39,8 +47,9 @@ target_include_directories(${PROJECT_NAME}
       "${CMAKE_SOURCE_DIR}/../src/"
     PUBLIC
       ${GTEST_INCLUDE_DIR}
-      "/usr/include"
-      # "/usr/include/c++/11/"
+      /usr/lib/avr/include
+      /usr/include
+      /usr/include/c++/11/
 )
 
 # add_library(swing_static STATIC IMPORTED)

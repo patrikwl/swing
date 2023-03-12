@@ -1,4 +1,5 @@
 #include "something.h"
+#include <stdint.h>
 
 Something::Something() {}
 
