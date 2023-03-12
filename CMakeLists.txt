@@ -6,7 +6,6 @@ if(NOT DEFINED AVR)
    set(AVR 1)
 endif(NOT DEFINED AVR)
 
-# message(STATUS "AVR222222 is set to: ${AVR}")
 
 
 set(AVR_MCU "atmega328p")
@@ -29,6 +28,11 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/cmake/gcc-avr.toolchain.cmake")
 set(PROJECT_NAME swing)
 project(${PROJECT_NAME})
 
+##########################################################################
+# export compile flags for clang language server
+##########################################################################
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 message(STATUS "Current uploadtool is: ${AVR_UPLOADTOOL}")
 message(STATUS "Current programmer is: ${AVR_PROGRAMMER}")
 message(STATUS "Current upload port is: ${AVR_UPLOADTOOL_PORT}")
@@ -40,7 +44,6 @@ message(STATUS "Current L_FUSE is set to: ${AVR_L_FUSE}")
 if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
-
 
 ##########################################################################
 # set compiler options for build types
@@ -88,13 +91,3 @@ add_definitions("-c")
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 # message(STATUS "AVR is set to: ${AVR}")
-
-# if (NOT AVR)
-# message(STATUS "AVR is set to44444: ${AVR}")
-#    enable_testing()
-#    add_subdirectory(test)
-# endif(NOT AVR)
-
-
-
-#message(FATAL_ERROR "asdasdassda ${CMAKE_SYSTEM_NAME}")

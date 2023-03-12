@@ -5,6 +5,9 @@
         "terminal.integrated.shell.linux": "/bin/bash"
     },
     "runArgs": [ "--device=/dev/bus/usb/" ],
+    "remoteEnv": {
+    "CXX" : "avr-g++"
+    },
 
     "customizations": {
         "vscode": {
