@@ -8,7 +8,7 @@
 #include <something.h>
 
 extern "C" {
-#include "../include/lcd.h"
+#include "../external-libs/lcd.h"
 #include <string.h>
 }
 
