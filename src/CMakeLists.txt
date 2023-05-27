@@ -1,22 +1,30 @@
 #####################################################################
 # simple AVR executable
 #####################################################################
-add_avr_executable(${PROJECT_NAME}
+
+set(target ${PROJECT_NAME})
+
+add_avr_executable(${target}
    main.cpp
-   something.cpp
+   SpiAdapter.cpp
+   SpiHandler.cpp
+   RegisterAccessor.cpp
    "${PROJECT_SOURCE_DIR}/include/lcd.c"
    )
 
-avr_target_include_directories(${PROJECT_NAME}
+avr_target_include_directories(${target}
    PUBLIC
-      ${PROJECT_SOURCE_DIR}/src
+      ${CMAKE_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/include
+    SYSTEM 
+      /usr/lib/avr/include/
 )
 
 include_directories(
-   include
+   PUBLIC
+   ${PROJECT_SOURCE_DIR}
+   ${PROJECT_SOURCE_DIR}/include
    SYSTEM
-      /usr/lib/avr/include
+      /usr/lib/avr/include/
 )
-
 # set(CMAKE_VERBOSE_MAKEFILE ON)

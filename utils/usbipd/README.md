@@ -41,10 +41,8 @@ sudo avrdude -B 5 -c usbasp -p m328
 and you should see
 "avrdude: AVR device initialized and ready to accept instructions"
 
-## In dev container
-Ctrl+shit+p
->Dev containers: Attach to Running Container
-
+Note:
+Probably need to restart the container for effect after insall.
 
 ## To flash
 Build project:
