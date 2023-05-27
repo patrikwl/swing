@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.16)
 
 set(PROJECT_NAME MY_TESTS)
 project(${PROJECT_NAME})
@@ -10,12 +10,15 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mtune=generic")
 
 set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
-  "${CMAKE_SOURCE_DIR}/../src/something.h"
+  "${CMAKE_SOURCE_DIR}/../src/SpiHandler.h"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.h"
+  "/usr/lib/avr/include/avr/iom328p.h"
 )
 
 set(SRCS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.c"
-  "${CMAKE_SOURCE_DIR}/../src/something.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/SpiHandler.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.cpp"
 )
 
 set(TARGET_LINUX_LIB swing_linux_static)
@@ -26,16 +29,18 @@ add_library(${TARGET_LINUX_LIB} STATIC ${SRCS} ${HDRS})
 target_include_directories(${TARGET_LINUX_LIB}
   PRIVATE
     /usr/lib/avr/include
+    /usr/lib/avr/include/avr/x86_64-linux-gnu/include
 
 )
 include_directories(
   SYSTEM
-    /usr/include/c++/11/
+    /usr/include/c++/9/
 )
 
 add_executable(${PROJECT_NAME}
   main.cpp
-  test_template.cpp
+  test_SpiHandler.cpp
+  test_RegisterAccessor.cpp
 
 )
 
@@ -47,7 +52,6 @@ target_include_directories(${PROJECT_NAME}
       "${CMAKE_SOURCE_DIR}/../src/"
     PUBLIC
       ${GTEST_INCLUDE_DIR}
-      /usr/lib/avr/include
       /usr/include
       /usr/include/c++/11/
 )
