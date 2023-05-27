@@ -1,8 +1,6 @@
 #ifndef SRC_ISPIADAPTER_H
 #define SRC_ISPIADAPTER_H
 
-#define SPI_DDR DDRB
-
 #include <stdint.h>
 
 class ISpiAdapter {
@@ -26,6 +24,3 @@ class ISpiAdapter {
    virtual uint8_t const transfer(uint8_t const data) = 0;
 };
 #endif
-
-//    // set CS, MOSI and SCK to output
-//    SPI_DDR |= (1 << CS) | (1 << MOSI) | (1 << SCK);
