@@ -17,12 +17,11 @@ void SpiAdapter::init()
    registerAccessor->setBit(SPCR, CPOL);
    // Set data sampling on leading edge of SCK
    registerAccessor->setBit(SPCR, CPHA);
-
 }
 
-void SpiAdapter::configure(ISpiAdapter::SpiConfig const &conf) 
-{ 
-   setSckRate(conf.freq); 
+void SpiAdapter::configure(ISpiAdapter::SpiConfig const &conf)
+{
+   setSckRate(conf.freq);
    setOutputPorts(conf.CS_PIN, conf.MOSI_PIN, conf.SCK_PIN);
 }
 
