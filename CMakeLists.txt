@@ -8,16 +8,17 @@ endif(NOT DEFINED AVR)
 
 
 
-set(AVR_MCU "atmega328p")
-set(MCU_SPEED "4000000UL")
+set(AVR_MCU "atmega328")
+set(MCU_SPEED "8000000UL")
 
 set(AVR_PROGRAMMER usbasp)
 set(AVR_UPLOADTOOL avrdude)
-set(AVR_UPLOADTOOL_BAUDRATE 9600)
+set(AVR_UPLOADTOOL_BAUDRATE 19200)
 
 # Awesome fuse helper gui: https://www.engbedded.com/fusecalc/
-set(AVR_H_FUSE 0xd9)
-set(AVR_L_FUSE 0xc3)
+set(AVR_H_FUSE 0xda)
+set(AVR_L_FUSE 0xe2)
+set(AVR_E_FUSE 0xfd)
 
 message(STATUS "AVR is set to: ${AVR}")
 
@@ -40,6 +41,7 @@ message(STATUS "Current uploadtool options are: ${AVR_UPLOADTOOL_OPTIONS}")
 message(STATUS "Current MCU is set to: ${AVR_MCU}")
 message(STATUS "Current H_FUSE is set to: ${AVR_H_FUSE}")
 message(STATUS "Current L_FUSE is set to: ${AVR_L_FUSE}")
+message(STATUS "Current E_FUSE is set to: ${AVR_E_FUSE}")
 
 if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE Release)
@@ -69,7 +71,7 @@ add_definitions("-fpack-struct")
 add_definitions("-fshort-enums")
 add_definitions("-Wall")
 add_definitions("-Werror")
-# add_definitions("-Wunused-variable")
+add_definitions("-Wunused-variable")
 add_definitions("-pedantic")
 add_definitions("-pedantic-errors")
 add_definitions("-funsigned-char")
