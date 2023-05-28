@@ -59,10 +59,18 @@ endif(NOT AVR_UPLOADTOOL_PORT)
 # default programmer (hardware)
 if(NOT AVR_PROGRAMMER)
     set(
-            AVR_PROGRAMMER avrispmkII
-            CACHE STRING "Set default programmer hardware model: avrispmkII"
+            AVR_PROGRAMMER usbasp
+            CACHE STRING "Set default programmer hardware model: usbasp"
     )
 endif(NOT AVR_PROGRAMMER)
+
+if(AVR_PROGRAMMER)
+    set(AVR_UPLOADTOOL_OPTIONS ${AVR_UPLOADTOOL_OPTIONS} -c ${AVR_PROGRAMMER})
+endif()
+
+if(AVR_MCU STREQUAL "atmega328") ##FIX THIS IN THE FUTURE
+    set(AVR_UPLOADTOOL_OPTIONS ${AVR_UPLOADTOOL_OPTIONS} -p m328)
+endif()
 
 # use AVR_UPLOADTOOL_BAUDRATE as baudrate for upload tool (if defined)
 if(AVR_UPLOADTOOL_BAUDRATE)
@@ -166,7 +174,7 @@ function(add_avr_executable EXECUTABLE_NAME)
     add_custom_target(
         upload_${EXECUTABLE_NAME}
         ${AVR_UPLOADTOOL} ${AVR_UPLOADTOOL_BASE_OPTIONS} ${AVR_UPLOADTOOL_OPTIONS}
-           -U flash:w:${hex_file}
+           -U flash:w:${hex_file}:a
            -P ${AVR_UPLOADTOOL_PORT}
         DEPENDS ${hex_file}
         COMMENT "Uploading ${hex_file} to ${AVR_MCU} using ${AVR_PROGRAMMER}"
