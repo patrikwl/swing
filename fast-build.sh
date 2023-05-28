@@ -5,7 +5,7 @@ cmake ..
 make
 
 
-if [ -e /workspaces/swing/build/src/swing_atmega328p-eeprom.hex ]; then
+if [ -e /workspaces/swing/build/src/swing_atmega328-eeprom.hex ]; then
 #unittest
 echo 'Building unittest'
 cd ../test/build
@@ -15,4 +15,5 @@ echo 'Running unittest'
 ./MY_TESTS
 else
 echo 'Error: stopping build.sh'
+echo "Error: did not find \"workspaces/swing/build/src/swing_atmega328-eeprom.hex\""
 fi
