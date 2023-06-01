@@ -9,7 +9,7 @@ class UartManager : IUartManager {
    UartManager(IUartAdapter *theUartAdapter);
 
    void transmit16Bits(int16_t const dataToSend) override;
-   void transmitString(const char *buffer, uint8_t const bufferSize) override;
+   void transmitString(const char *buffer) override;
 
  private:
    IUartAdapter *uartAdapter{nullptr};

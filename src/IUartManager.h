@@ -15,7 +15,7 @@ class IUartManager {
    //       SpiConfig(UartBaudRate br) : baudRate(br) {}
    //    };
    virtual void transmit16Bits(int16_t const dataToSend) = 0;
-   virtual void transmitString(const char *buffer, uint8_t const bufferSize) = 0;
+   virtual void transmitString(const char *buffer) = 0;
 };
 
 #endif
