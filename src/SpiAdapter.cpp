@@ -17,12 +17,11 @@ void SpiAdapter::init()
    registerAccessor->setBit(SPCR, CPOL);
    // Set data sampling on leading edge of SCK
    registerAccessor->setBit(SPCR, CPHA);
-
 }
 
-void SpiAdapter::configure(ISpiAdapter::SpiConfig const &conf) 
-{ 
-   setSckRate(conf.freq); 
+void SpiAdapter::configure(ISpiAdapter::SpiConfig const &conf)
+{
+   setSckRate(conf.freq);
    setOutputPorts(conf.CS_PIN, conf.MOSI_PIN, conf.SCK_PIN);
 }
 
@@ -37,42 +36,42 @@ void SpiAdapter::setSckRate(ISpiAdapter::SpiFrequency const &freq)
 {
    switch (freq) {
       case (ISpiAdapter::SpiFrequency::FOSC_4):
-         registerAccessor->clearBit(SPCR, SPR1);
+         registerAccessor->clearBit(SPCR, SPR0);
          registerAccessor->clearBit(SPCR, SPR1);
          registerAccessor->clearBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_16):
-         registerAccessor->clearBit(SPCR, SPR1);
+         registerAccessor->clearBit(SPCR, SPR0);
          registerAccessor->setBit(SPCR, SPR1);
          registerAccessor->clearBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_64):
+         registerAccessor->clearBit(SPCR, SPR0);
          registerAccessor->setBit(SPCR, SPR1);
-         registerAccessor->clearBit(SPCR, SPR1);
          registerAccessor->clearBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_128):
-         registerAccessor->setBit(SPCR, SPR1);
+         registerAccessor->setBit(SPCR, SPR0);
          registerAccessor->setBit(SPCR, SPR1);
          registerAccessor->clearBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_2):
-         registerAccessor->clearBit(SPCR, SPR1);
+         registerAccessor->clearBit(SPCR, SPR0);
          registerAccessor->clearBit(SPCR, SPR1);
          registerAccessor->setBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_8):
+         registerAccessor->setBit(SPCR, SPR0);
          registerAccessor->clearBit(SPCR, SPR1);
-         registerAccessor->setBit(SPCR, SPR1);
          registerAccessor->setBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_32):
+         registerAccessor->clearBit(SPCR, SPR0);
          registerAccessor->setBit(SPCR, SPR1);
-         registerAccessor->clearBit(SPCR, SPR1);
          registerAccessor->setBit(SPSR, SPI2X);
          break;
       case (ISpiAdapter::SpiFrequency::FOSC_6):
-         registerAccessor->setBit(SPCR, SPR1);
+         registerAccessor->setBit(SPCR, SPR0);
          registerAccessor->setBit(SPCR, SPR1);
          registerAccessor->setBit(SPSR, SPI2X);
          break;

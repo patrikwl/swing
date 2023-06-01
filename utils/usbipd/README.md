@@ -55,7 +55,15 @@ cd /workspaces/swing/build/src
 
 To flash
 
-sudo avrdude -c usbasp -p m328 -B 5 -U flash:w:"swing_atmega328p.hex":a -U lfuse:w:0xE2:m -U hfuse:w:0xDA:m -U efuse:w:0xFD:m
+sudo avrdude -c usbasp -P usb -p m328 -U flash:w:"swing_atmega328.hex":a -U lfuse:w:0xE2:m -U hfuse:w:0xDA:m -U efuse:w:0xFD:m
 
 Options, see
 https://www.nongnu.org/avrdude/user-manual/avrdude_3.html
+
+## fix signature issue
+
+issue:
+"FATAL: file /workspaces/swing/external-libs/simulavr/libsim/avrreadelf.cpp: line 157: wrong device signature, expected=0x1e9514, given=0x1e950f"
+
+fix:
+sudo avrdude -c usbasp -p m328 -b 19200 -v -U signature:w:0x1E,0x95,0x14:m
