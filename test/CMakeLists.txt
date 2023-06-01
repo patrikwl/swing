@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 set(PROJECT_NAME MY_TESTS)
 project(${PROJECT_NAME})
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
@@ -43,6 +45,7 @@ add_executable(${PROJECT_NAME}
   main.cpp
   test_SpiHandler.cpp
   test_RegisterAccessor.cpp
+  test_UartManager.cpp
 
 )
 

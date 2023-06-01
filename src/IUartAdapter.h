@@ -16,7 +16,7 @@ class IUartAdapter {
       UartConfig(UartBaudRate br, const uint8_t theTX_PIN) : baudRate(br), TX_PIN(theTX_PIN) {}
    };
    virtual void waitForEmptyTransmitBuffer() = 0;
-   virtual bool putChar(const char &data) = 0;
+   virtual void putChar(const char &data) = 0;
 };
 
 #endif

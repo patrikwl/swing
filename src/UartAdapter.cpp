@@ -36,4 +36,4 @@ void UartAdapter::waitForEmptyTransmitBuffer()
    while (!(UCSR0A & (1 << UDRE0))) {
    }
 }
-bool UartAdapter::putChar(const char &data) { UDR0 = data; }
+void UartAdapter::putChar(const char &data) { UDR0 = data; }

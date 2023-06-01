@@ -9,7 +9,7 @@ class UartAdapter : IUartAdapter {
    UartAdapter(IRegisterAccessor *theRegisterAccessor);
 
    void waitForEmptyTransmitBuffer() override;
-   bool putChar(const char &data) override;
+   void putChar(const char &data) override;
 
    void configure(IUartAdapter::UartConfig &conf);
 
