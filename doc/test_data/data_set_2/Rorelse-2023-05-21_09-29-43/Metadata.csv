@@ -1,0 +1,2 @@
+version,device name,recording time,platform,appVersion,device id,sensors,sampleRateMs
+3,LE2123,2023-05-21_09-29-43,android,1.15.2,ee04e754-e55d-4baa-b176-11680456ca50,Accelerometer|Gravity|Gyroscope|Orientation|Magnetometer|Annotation|TotalAcceleration|MagnetometerUncalibrated|GyroscopeUncalibrated|AccelerometerUncalibrated,10|10|10|10|10||10|10|10|10
