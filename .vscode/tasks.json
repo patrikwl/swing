@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "startSimulavr",
+            "isBackground": true,
+            "problemMatcher": [],
+            "type": "shell",
+            "command": "${workspaceFolder}/utils/simulavr/start.sh"
+        },
+        {
+            "label": "stopSimulavr",
+            "type": "shell",
+            "command": "${workspaceFolder}/utils/simulavr/stop.sh"
+        }
+    ]
+}

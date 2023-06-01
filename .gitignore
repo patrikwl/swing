@@ -1,5 +1,5 @@
 build*
-.vscode
 tmp*
 test/build*
 .cache*
+.clangd*

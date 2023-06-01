@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Avr",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/workspaces/swing/build/src/swing_atmega328.elf",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/avr-gdb",
+      "miDebuggerArgs": "-x /workspaces/swing/utils/simulavr/avr-gdb.conf",
+      "preLaunchTask": "startSimulavr",
+      "postDebugTask": "stopSimulavr"
+    }
+  ]
+}
