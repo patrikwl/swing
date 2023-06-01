@@ -39,6 +39,4 @@ RUN chmod 0440 /etc/sudoers.d/dev
 RUN usermod -a -G dialout dev
 
 
-RUN mkdir /workspace
-WORKDIR /workspace
 USER dev

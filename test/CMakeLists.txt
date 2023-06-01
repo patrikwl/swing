@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 set(PROJECT_NAME MY_TESTS)
 project(${PROJECT_NAME})
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
@@ -12,13 +14,15 @@ set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.h"
   "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.h"
-  "/usr/lib/avr/include/avr/iom328p.h"
+  "${CMAKE_SOURCE_DIR}/../src/UartManager.h"
+  # "/usr/lib/avr/include/avr/iom328p.h"
 )
 
 set(SRCS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.c"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.cpp"
   "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/UartManager.cpp"
 )
 
 set(TARGET_LINUX_LIB swing_linux_static)
@@ -41,6 +45,7 @@ add_executable(${PROJECT_NAME}
   main.cpp
   test_SpiHandler.cpp
   test_RegisterAccessor.cpp
+  test_UartManager.cpp
 
 )
 

@@ -9,6 +9,8 @@ add_avr_executable(${target}
    SpiAdapter.cpp
    SpiHandler.cpp
    RegisterAccessor.cpp
+   UartAdapter.cpp
+   UartManager.cpp
    "${PROJECT_SOURCE_DIR}/include/lcd.c"
    )
 
@@ -16,7 +18,7 @@ avr_target_include_directories(${target}
    PUBLIC
       ${CMAKE_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/include
-    SYSTEM 
+    SYSTEM
       /usr/lib/avr/include/
 )
 
@@ -27,4 +29,6 @@ include_directories(
    SYSTEM
       /usr/lib/avr/include/
 )
+
+avr_generate_fixed_targets()
 # set(CMAKE_VERBOSE_MAKEFILE ON)
