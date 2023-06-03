@@ -8,15 +8,10 @@
 #include "src/UartManager.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <util/delay.h>
 
-extern "C" {
-// #include "../include/lcd.h"
 #include <string.h>
-}
 
 /* This port corresponds to the "-W 0x20,-" command line option. */
 #define special_output_port (*((volatile char *)0x20))
