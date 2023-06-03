@@ -5,17 +5,13 @@
 #include "SpiAdapter.h"
 #include "SpiHandler.h"
 #include "UartAdapter.h"
+#include "src/UartManager.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <util/delay.h>
 
-extern "C" {
-// #include "../include/lcd.h"
 #include <string.h>
-}
 
 /* This port corresponds to the "-W 0x20,-" command line option. */
 #define special_output_port (*((volatile char *)0x20))
@@ -44,12 +40,16 @@ int main(void)
    UartAdapter uartAdapter{&registerAccessor};
    IUartAdapter::UartConfig uartConf(IUartAdapter::UartBaudRate::br115200, PIND3);
    uartAdapter.configure(uartConf);
+   UartManager uartManager{&uartAdapter};
    SpiAdapter spiAdapter{&registerAccessor};
    ISpiAdapter::SpiConfig spiConf(ISpiAdapter::SpiFrequency::FOSC_8, PINB2, PINB3, PINB4, PINB5);
    spiAdapter.configure(spiConf);
    SpiHandler spiHandler{&spiAdapter};
    sei();
    volatile char in_char;
+
+   const char *litLed = "turning on led \n";
+   const char *downLed = "turning off led \n";
 
    /* Output the prompt string */
    debug_puts("\nPress any key and enter:\n");
@@ -74,7 +74,9 @@ int main(void)
    special_output_port = '\n';
    while (1) {
       PORTB |= (1 << PB0); // LED ON
+      uartManager.transmitString(litLed);
       _delay_ms(2000);
+      uartManager.transmitString(downLed);
       PORTB &= ~(1 << PB0); // LED OFF ok
       _delay_ms(2000);
    }

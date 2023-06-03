@@ -4,7 +4,7 @@
 #include "IRegisterAccessor.h"
 #include "IUartAdapter.h"
 
-class UartAdapter : IUartAdapter {
+class UartAdapter : public IUartAdapter {
  public:
    UartAdapter(IRegisterAccessor *theRegisterAccessor);
 
