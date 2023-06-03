@@ -46,5 +46,7 @@ WORKDIR /home/dev/external-repos/simulavr/build
     RUN cmake install ..
     RUN make
 
+RUN echo "alias build='/workspaces/swing/scripts/build.sh'" >> ~/.bashrc
+RUN echo "alias flash='/workspaces/swing/scripts/flash.sh'" >> ~/.bashrc
 
 USER dev
