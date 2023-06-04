@@ -11,6 +11,7 @@ add_avr_executable(${target}
    RegisterAccessor.cpp
    UartAdapter.cpp
    UartManager.cpp
+   ConfigGetter.cpp
    "${PROJECT_SOURCE_DIR}/include/lcd.c"
    )
 
