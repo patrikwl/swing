@@ -1,10 +1,9 @@
 // #include <avr/signature.h>
-#include "ISpiAdapter.h"
-#include "IUartAdapter.h"
 #include "RegisterAccessor.h"
 #include "SpiAdapter.h"
 #include "SpiHandler.h"
 #include "UartAdapter.h"
+#include "logger.h"
 #include "src/UartManager.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
@@ -14,19 +13,6 @@
 #include "ConfigGetter.h"
 
 #include <string.h>
-
-/* This port corresponds to the "-W 0x20,-" command line option. */
-#define special_output_port (*((volatile char *)0x20))
-/* This port corresponds to the "-R 0x22,-" command line option. */
-#define special_input_port (*((volatile char *)0x22))
-/* Poll the specified string out the debug port. */
-void debug_puts(const char *str)
-{
-   const char *c;
-
-   for (c = str; *c; c++)
-      special_output_port = *c;
-}
 
 ISR(INT1_vect)
 {
@@ -38,7 +24,6 @@ ISR(INT1_vect)
 
 int main(void)
 {
-
    RegisterAccessor registerAccessor;
    ConfigGetter configurations;
    UartAdapter uartAdapter{&registerAccessor, &configurations};
@@ -47,37 +32,18 @@ int main(void)
    SpiHandler spiHandler{&spiAdapter};
    sei();
    volatile char in_char;
-
-   const char *litLed = "turning on led \n";
-   const char *downLed = "turning off led \n";
-
-   /* Output the prompt string */
-   debug_puts("\nPress any key and enter:\n");
-
-   /* Input one character but since line buffered, blocks until a CR. */
-   //   in_char = special_input_port;
-
-   /* Print the "what you entered:" message. */
-   debug_puts("\nYou entered:");
-
-   /* now echo the rest of the characters */
-
-   //   do {
-   //     special_output_port = in_char;
-   //   } while((in_char = special_input_port) != '\n');
-
+   const char *litLed = "turning on led";
+   const char *downLed = "turning off led";
    char buffer[32];
    int testDataToSebnd = 1337;
    sprintf(buffer, "ALO %u", testDataToSebnd);
-   debug_puts(buffer);
-
-   special_output_port = '\n';
+   LOGGER_DEBUG("message");
    while (1) {
-      PORTB |= (1 << PB0); // LED ON
-      uartManager.transmitString(litLed);
+      registerAccessor.setBit(PORTB, PB0); // LED ON
+      LOGGER_DEBUG(litLed);
       _delay_ms(2000);
-      uartManager.transmitString(downLed);
-      PORTB &= ~(1 << PB0); // LED OFF ok
+      LOGGER_DEBUG(downLed);
+      registerAccessor.clearBit(PORTB, PB0); // LED ON
       _delay_ms(2000);
    }
 }
