@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <util/delay.h>
 
+#include "ConfigGetter.h"
+
 #include <string.h>
 
 /* This port corresponds to the "-W 0x20,-" command line option. */
@@ -36,14 +38,12 @@ ISR(INT1_vect)
 
 int main(void)
 {
+
    RegisterAccessor registerAccessor;
-   UartAdapter uartAdapter{&registerAccessor};
-   IUartAdapter::UartConfig uartConf(IUartAdapter::UartBaudRate::br115200, PIND3);
-   uartAdapter.configure(uartConf);
+   ConfigGetter configurations;
+   UartAdapter uartAdapter{&registerAccessor, &configurations};
    UartManager uartManager{&uartAdapter};
-   SpiAdapter spiAdapter{&registerAccessor};
-   ISpiAdapter::SpiConfig spiConf(ISpiAdapter::SpiFrequency::FOSC_8, PINB2, PINB3, PINB4, PINB5);
-   spiAdapter.configure(spiConf);
+   SpiAdapter spiAdapter{&registerAccessor, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    sei();
    volatile char in_char;
