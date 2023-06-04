@@ -3,19 +3,20 @@
 
 #include "IRegisterAccessor.h"
 #include "ISpiAdapter.h"
+#include "ISpiConfigGetter.h"
 
 class SpiAdapter : public ISpiAdapter {
  public:
-   SpiAdapter(IRegisterAccessor *theRegisterAccessor);
+   SpiAdapter(IRegisterAccessor *theRegisterAccessor, ISpiConfigGetter *theConfGetter);
 
    uint8_t const transfer(uint8_t const data) override;
-   void configure(ISpiAdapter::SpiConfig const &conf);
 
  private:
    void init();
-   void setSckRate(ISpiAdapter::SpiFrequency const &freq);
-   void setOutputPorts(const uint8_t &csPin, const uint8_t &mosiPin, const uint8_t &sckPin);
+   void setSckRate();
+   void setIOPorts();
    IRegisterAccessor *registerAccessor{nullptr};
+   ISpiConfigGetter *confGetter{nullptr};
 };
 
 #endif
