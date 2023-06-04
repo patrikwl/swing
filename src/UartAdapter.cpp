@@ -3,24 +3,25 @@
 #include <avr/io.h>
 #include <stdio.h>
 
-UartAdapter::UartAdapter(IRegisterAccessor *theRegisterAccessor) : registerAccessor(theRegisterAccessor)
+UartAdapter::UartAdapter(IRegisterAccessor *theRegisterAccessor, IUartConfigGetter *theConfigGetter)
+    : registerAccessor(theRegisterAccessor), configGetter(theConfigGetter)
 {
-   // Enable UART receiver
-   registerAccessor->setBit(UCSR0B, TXEN0);
-
-   registerAccessor->setBit(UCSR0C, UCSZ01);
-   registerAccessor->setBit(UCSR0C, UCSZ00);
-   // registerAccessor->clearBit(UCSR0C, UCSZ02); 0 by default
+   init();
 }
 
-void UartAdapter::configure(IUartAdapter::UartConfig &conf)
+void UartAdapter::init()
 {
+   // Enable UART receiver module
+   registerAccessor->setBit(UCSR0B, TXEN0);
+   setCharacterSize();
+   setIOPorts();
+   setBaudRate();
+}
 
-   DDRD |= (1 << PD1);  // Set PD1 as output
-   PORTD |= (1 << PD1); // Set PD1 to high (idle state)
-
-   switch (conf.baudRate) {
-      case (IUartAdapter::UartBaudRate::br115200):
+void UartAdapter::setBaudRate()
+{
+   switch (configGetter->getBaudRate()) {
+      case (IUartConfigGetter::UartBaudRate::br115200):
          registerAccessor->clearBit(UCSR0A, U2X0);
          uint16_t ubrrValue = F_CPU / (16UL * 115200) - 1;
          UBRR0H = (ubrrValue >> 8) & 0xFF;
@@ -29,6 +30,27 @@ void UartAdapter::configure(IUartAdapter::UartConfig &conf)
       defualt:
          break;
    };
+}
+
+void UartAdapter::setIOPorts()
+{
+   // Set OI port(s)
+   registerAccessor->setBit(DDRD, configGetter->getTxPin());
+   registerAccessor->setBit(PORTD, configGetter->getTxPin());
+}
+
+void UartAdapter::setCharacterSize()
+{
+   switch (configGetter->getFrameSize()) {
+      case (IUartConfigGetter::UartFrameSize::EightBit):
+         registerAccessor->setBit(UCSR0C, UCSZ00);
+         registerAccessor->setBit(UCSR0C, UCSZ01);
+         registerAccessor->clearBit(UCSR0B, UCSZ02);
+         break;
+      default:
+         // not implemented
+         break;
+   }
 }
 
 void UartAdapter::waitForEmptyTransmitBuffer()

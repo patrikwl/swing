@@ -3,18 +3,22 @@
 
 #include "IRegisterAccessor.h"
 #include "IUartAdapter.h"
+#include "IUartConfigGetter.h"
 
 class UartAdapter : public IUartAdapter {
  public:
-   UartAdapter(IRegisterAccessor *theRegisterAccessor);
+   UartAdapter(IRegisterAccessor *theRegisterAccessor, IUartConfigGetter *theConfigGetter);
 
    void waitForEmptyTransmitBuffer() override;
    void putChar(const char &data) override;
 
-   void configure(IUartAdapter::UartConfig &conf);
-
  private:
+   void init();
+   void setCharacterSize();
+   void setIOPorts();
+   void setBaudRate();
    IRegisterAccessor *registerAccessor{nullptr};
+   IUartConfigGetter *configGetter{nullptr};
 };
 
 #endif
