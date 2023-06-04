@@ -3,8 +3,9 @@
 
 #include "HardwareSetup.h"
 #include "ISpiConfigGetter.h"
+#include "IUartConfigGetter.h"
 
-class ConfigGetter : public ISpiConfigGetter {
+class ConfigGetter : public ISpiConfigGetter, public IUartConfigGetter {
  public:
    ConfigGetter();
 
@@ -12,7 +13,11 @@ class ConfigGetter : public ISpiConfigGetter {
    const uint8_t getMosiPin() override;
    const uint8_t getMisoPin() override;
    const uint8_t getSckPin() override;
-   ISpiConfigGetter::SpiFrequency getSckFreqyency() override;
+   const ISpiConfigGetter::SpiFrequency getSckFreqyency() override;
+
+   const uint8_t getTxPin() override;
+   const IUartConfigGetter::UartBaudRate getBaudRate() override;
+   const IUartConfigGetter::UartFrameSize getFrameSize() override;
 
  private:
 };
