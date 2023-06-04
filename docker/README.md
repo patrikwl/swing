@@ -2,7 +2,7 @@
 https://dev.to/bowmanjd/install-docker-on-windows-wsl-without-docker-desktop-34m9
 
 ## Build docker image
-docker build -f Dockerfile -t avr-ubuntu:0.0.5 .
+docker build -f Dockerfile -t avr-ubuntu:0.1.1 .
 
 ## Use docker image in vscode with "Dec Container" extension:
 in ${PROJECT_ROOT}/.devcontainer.json add/modify the version of the docker image just assembled.
