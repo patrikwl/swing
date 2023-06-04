@@ -32,18 +32,19 @@ int main(void)
    SpiHandler spiHandler{&spiAdapter};
    sei();
    volatile char in_char;
-   const char *litLed = "turning on led";
-   const char *downLed = "turning off led";
+   const char *litLed = "motor on";
+   const char *downLed = "motor off";
    char buffer[32];
    int testDataToSebnd = 1337;
    sprintf(buffer, "ALO %u", testDataToSebnd);
    LOGGER_DEBUG("message");
+   registerAccessor.setBit(DDRB, PB0);
    while (1) {
-      registerAccessor.setBit(PORTB, PB0); // LED ON
+      registerAccessor.setBit(PORTB, PB0);
       LOGGER_DEBUG(litLed);
-      _delay_ms(2000);
+      _delay_ms(500);
       LOGGER_DEBUG(downLed);
-      registerAccessor.clearBit(PORTB, PB0); // LED ON
-      _delay_ms(2000);
+      registerAccessor.clearBit(PORTB, PB0);
+      _delay_ms(5000);
    }
 }

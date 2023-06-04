@@ -4,10 +4,6 @@
 volatile uint8_t TEST_REGISTER{0b10000010};
 volatile uint16_t TEST_16BREGISTER{0b1000000000000001};
 
-// uint16_t
-// class IRegisterAccessor;
-class IRegisterAccessor;
-
 class TestRegisterAccessor : public ::testing::Test {
  public:
    RegisterAccessor accessor;
