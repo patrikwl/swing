@@ -14,7 +14,8 @@
           "extensions": [
             "eamodio.gitlens",
             "llvm-vs-code-extensions.vscode-clangd",
-            "zchrissirhcz.cmake-highlight"
+            "zchrissirhcz.cmake-highlight",
+            "FleeXo.cpp-class-creator"
         ]
         }
     },
