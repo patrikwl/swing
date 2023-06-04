@@ -38,12 +38,11 @@ ISR(INT1_vect)
 
 int main(void)
 {
+
    RegisterAccessor registerAccessor;
-   UartAdapter uartAdapter{&registerAccessor};
-   IUartAdapter::UartConfig uartConf(IUartAdapter::UartBaudRate::br115200, PIND3);
-   uartAdapter.configure(uartConf);
-   UartManager uartManager{&uartAdapter};
    ConfigGetter configurations;
+   UartAdapter uartAdapter{&registerAccessor, &configurations};
+   UartManager uartManager{&uartAdapter};
    SpiAdapter spiAdapter{&registerAccessor, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    sei();
