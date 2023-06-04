@@ -11,7 +11,7 @@ class ISpiConfigGetter {
    virtual const uint8_t getMosiPin() = 0;
    virtual const uint8_t getMisoPin() = 0;
    virtual const uint8_t getSckPin() = 0;
-   virtual SpiFrequency getSckFreqyency() = 0;
+   virtual const SpiFrequency getSckFreqyency() = 0;
 
  private:
 };
