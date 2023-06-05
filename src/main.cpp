@@ -23,18 +23,19 @@ ISR(INT1_vect)
    PORTB &= ~(1 << PB0); // LED OFF ok
    _delay_ms(1000);
 }
-
+IUartManager *uartManager;
 int main(void)
 {
    RegisterManager registerManager;
    ConfigGetter configurations;
    UartAdapter uartAdapter{&registerManager, &configurations};
-   UartManager uartManager{&uartAdapter};
+   UartManager uartManagerInstance(&uartAdapter);
+   uartManager = &uartManagerInstance;
+
    SpiAdapter spiAdapter{&registerManager, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    Adxl345ConfigGetter adxlConfigGetter;
-   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager, &uartManager};
-
+   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager};
    sei();
    volatile char in_char;
    const char *litLed = "motor on";

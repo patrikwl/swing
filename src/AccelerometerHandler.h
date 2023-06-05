@@ -6,19 +6,16 @@
 #include "ISpiHandler.h"
 
 #include "IRegisterManager.h"
-#include "IUartManager.h"
 
 class AccelerometerHandler : public IAdxl345 {
  public:
-   AccelerometerHandler(IAdxl345ConfigGetter *theConfigGetter, ISpiHandler *theSpiHandler, IRegisterManager *theRegisterManager,
-                        IUartManager *theUartManager);
+   AccelerometerHandler(IAdxl345ConfigGetter *theConfigGetter, ISpiHandler *theSpiHandler, IRegisterManager *theRegisterManager);
 
    void setBypassMode() override;
 
  private:
    IAdxl345ConfigGetter *configGetter{nullptr};
    ISpiHandler *spiHandler{nullptr};
-   IUartManager *uartManager{nullptr};
    IRegisterManager *registerManager{nullptr};
 };
 
