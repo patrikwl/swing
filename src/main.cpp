@@ -1,5 +1,5 @@
 // #include <avr/signature.h>
-#include "RegisterAccessor.h"
+#include "RegisterManager.h"
 #include "SpiAdapter.h"
 #include "SpiHandler.h"
 #include "UartAdapter.h"
@@ -24,11 +24,11 @@ ISR(INT1_vect)
 
 int main(void)
 {
-   RegisterAccessor registerAccessor;
+   RegisterManager registerManager;
    ConfigGetter configurations;
-   UartAdapter uartAdapter{&registerAccessor, &configurations};
+   UartAdapter uartAdapter{&registerManager, &configurations};
    UartManager uartManager{&uartAdapter};
-   SpiAdapter spiAdapter{&registerAccessor, &configurations};
+   SpiAdapter spiAdapter{&registerManager, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    sei();
    volatile char in_char;

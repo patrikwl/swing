@@ -1,9 +1,9 @@
 #ifndef SPIHANDLER_H
 #define SPIHANDLER_H
 
+#include "IRegisterManager.h"
 #include "ISpiAdapter.h"
 #include "ISpiHandler.h"
-#include "IRegisterAccessor.h"
 
 class SpiHandler : public ISpiHandler {
  public:

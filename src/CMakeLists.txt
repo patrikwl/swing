@@ -8,7 +8,7 @@ add_avr_executable(${target}
    main.cpp
    SpiAdapter.cpp
    SpiHandler.cpp
-   RegisterAccessor.cpp
+   RegisterManager.cpp
    UartAdapter.cpp
    UartManager.cpp
    ConfigGetter.cpp
