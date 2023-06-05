@@ -1,4 +1,6 @@
 // #include <avr/signature.h>
+#include "AccelerometerHandler.h"
+#include "Adxl345ConfigGetter.h"
 #include "RegisterManager.h"
 #include "SpiAdapter.h"
 #include "SpiHandler.h"
@@ -30,6 +32,9 @@ int main(void)
    UartManager uartManager{&uartAdapter};
    SpiAdapter spiAdapter{&registerManager, &configurations};
    SpiHandler spiHandler{&spiAdapter};
+   Adxl345ConfigGetter adxlConfigGetter;
+   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager, &uartManager};
+
    sei();
    volatile char in_char;
    const char *litLed = "motor on";
@@ -37,8 +42,8 @@ int main(void)
    char buffer[32];
    int testDataToSebnd = 1337;
    sprintf(buffer, "ALO %u", testDataToSebnd);
-   LOGGER_DEBUG("message");
-   registerAccessor.setBit(DDRB, PB0);
+   // LOGGER_DEBUG("message");
+   registerManager.setBit(DDRB, PB0);
    while (1) {
       registerAccessor.setBit(PORTB, PB0);
       LOGGER_DEBUG(litLed);

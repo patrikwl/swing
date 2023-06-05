@@ -1,4 +1,5 @@
 #include "ConfigGetter.h"
+#include "HardwareSetup.h"
 
 ConfigGetter::ConfigGetter() {}
 
