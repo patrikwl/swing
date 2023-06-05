@@ -13,7 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mtune=generic")
 set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.h"
-  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.h"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterManager.h"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.h"
   # "/usr/lib/avr/include/avr/iom328p.h"
 )
@@ -21,7 +21,7 @@ set(HDRS
 set(SRCS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.c"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.cpp"
-  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterManager.cpp"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.cpp"
 )
 
@@ -44,7 +44,7 @@ include_directories(
 add_executable(${PROJECT_NAME}
   main.cpp
   test_SpiHandler.cpp
-  test_RegisterAccessor.cpp
+  test_RegisterManager.cpp
   test_UartManager.cpp
 
 )
