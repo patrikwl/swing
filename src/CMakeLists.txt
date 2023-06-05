@@ -12,6 +12,8 @@ add_avr_executable(${target}
    UartAdapter.cpp
    UartManager.cpp
    ConfigGetter.cpp
+   AccelerometerHandler.cpp
+   Adxl345ConfigGetter.cpp
    "${PROJECT_SOURCE_DIR}/include/lcd.c"
    )
 
