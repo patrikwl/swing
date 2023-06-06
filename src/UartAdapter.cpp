@@ -3,8 +3,8 @@
 #include <avr/io.h>
 #include <stdio.h>
 
-UartAdapter::UartAdapter(IRegisterAccessor *theRegisterAccessor, IUartConfigGetter *theConfigGetter)
-    : registerAccessor(theRegisterAccessor), configGetter(theConfigGetter)
+UartAdapter::UartAdapter(IRegisterManager *theRegisterManager, IUartConfigGetter *theConfigGetter)
+    : registerAccessor(theRegisterManager), configGetter(theConfigGetter)
 {
    init();
 }
