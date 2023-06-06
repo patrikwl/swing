@@ -28,7 +28,6 @@ void SpiAdapter::init()
 
 void SpiAdapter::setIOPorts()
 {
-   registerAccessor->setBit(DDRB, confGetter->getCsPin());
    registerAccessor->setBit(DDRB, confGetter->getMosiPin());
    registerAccessor->setBit(DDRB, confGetter->getSckPin());
 }
@@ -81,9 +80,7 @@ void SpiAdapter::setSckRate()
 
 uint8_t const SpiAdapter::transfer(uint8_t const data)
 {
-   registerAccessor->clearBit(DDRB, confGetter->getCsPin());
    SPDR = data;
    while (!(SPSR & (1 << SPIF)))
       return SPDR;
-   registerAccessor->setBit(DDRB, confGetter->getCsPin());
 }
