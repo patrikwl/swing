@@ -8,10 +8,12 @@ add_avr_executable(${target}
    main.cpp
    SpiAdapter.cpp
    SpiHandler.cpp
-   RegisterAccessor.cpp
+   RegisterManager.cpp
    UartAdapter.cpp
    UartManager.cpp
    ConfigGetter.cpp
+   AccelerometerHandler.cpp
+   Adxl345ConfigGetter.cpp
    "${PROJECT_SOURCE_DIR}/include/lcd.c"
    )
 

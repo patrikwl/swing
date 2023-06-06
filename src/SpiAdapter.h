@@ -1,13 +1,13 @@
 #ifndef SPIADAPTER_H
 #define SPIADAPTER_H
 
-#include "IRegisterAccessor.h"
+#include "IRegisterManager.h"
 #include "ISpiAdapter.h"
 #include "ISpiConfigGetter.h"
 
 class SpiAdapter : public ISpiAdapter {
  public:
-   SpiAdapter(IRegisterAccessor *theRegisterAccessor, ISpiConfigGetter *theConfGetter);
+   SpiAdapter(IRegisterManager *theRegisterManager, ISpiConfigGetter *theConfGetter);
 
    uint8_t const transfer(uint8_t const data) override;
 
@@ -15,7 +15,7 @@ class SpiAdapter : public ISpiAdapter {
    void init();
    void setSckRate();
    void setIOPorts();
-   IRegisterAccessor *registerAccessor{nullptr};
+   IRegisterManager *registerAccessor{nullptr};
    ISpiConfigGetter *confGetter{nullptr};
 };
 

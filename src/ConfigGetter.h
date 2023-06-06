@@ -1,7 +1,6 @@
 #ifndef CONFIGGETTER_H
 #define CONFIGGETTER_H
 
-#include "HardwareSetup.h"
 #include "ISpiConfigGetter.h"
 #include "IUartConfigGetter.h"
 

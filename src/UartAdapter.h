@@ -1,13 +1,13 @@
 #ifndef UARTADAPTER_H
 #define UARTADAPTER_H
 
-#include "IRegisterAccessor.h"
+#include "IRegisterManager.h"
 #include "IUartAdapter.h"
 #include "IUartConfigGetter.h"
 
 class UartAdapter : public IUartAdapter {
  public:
-   UartAdapter(IRegisterAccessor *theRegisterAccessor, IUartConfigGetter *theConfigGetter);
+   UartAdapter(IRegisterManager *theRegisterManager, IUartConfigGetter *theConfigGetter);
 
    void waitForEmptyTransmitBuffer() override;
    void putChar(const char &data) override;
@@ -17,7 +17,7 @@ class UartAdapter : public IUartAdapter {
    void setCharacterSize();
    void setIOPorts();
    void setBaudRate();
-   IRegisterAccessor *registerAccessor{nullptr};
+   IRegisterManager *registerAccessor{nullptr};
    IUartConfigGetter *configGetter{nullptr};
 };
 

@@ -3,8 +3,8 @@
 
 #include <avr/io.h>
 
-SpiAdapter::SpiAdapter(IRegisterAccessor *theRegisterAccessor, ISpiConfigGetter *theConfGetter)
-    : registerAccessor(theRegisterAccessor), confGetter(theConfGetter)
+SpiAdapter::SpiAdapter(IRegisterManager *theRegisterManager, ISpiConfigGetter *theConfGetter)
+    : registerAccessor(theRegisterManager), confGetter(theConfGetter)
 {
    init();
 }
@@ -81,7 +81,9 @@ void SpiAdapter::setSckRate()
 
 uint8_t const SpiAdapter::transfer(uint8_t const data)
 {
+   registerAccessor->clearBit(DDRB, confGetter->getCsPin());
    SPDR = data;
    while (!(SPSR & (1 << SPIF)))
       return SPDR;
+   registerAccessor->setBit(DDRB, confGetter->getCsPin());
 }

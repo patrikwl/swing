@@ -13,16 +13,23 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mtune=generic")
 set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.h"
-  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.h"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterManager.h"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.h"
+  # "${CMAKE_SOURCE_DIR}/../src/ConfigGetter.h"
+  "${CMAKE_SOURCE_DIR}/../src/AccelerometerHandler.h"
+  # "${CMAKE_SOURCE_DIR}/../src/HardwareSetup.h"
   # "/usr/lib/avr/include/avr/iom328p.h"
+  "${CMAKE_SOURCE_DIR}/../src/Adxl345ConfigGetter.h"
 )
 
 set(SRCS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.c"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.cpp"
-  "${CMAKE_SOURCE_DIR}/../src/RegisterAccessor.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/RegisterManager.cpp"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.cpp"
+  # "${CMAKE_SOURCE_DIR}/../src/ConfigGetter.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/AccelerometerHandler.cpp"
+  "${CMAKE_SOURCE_DIR}/../src/Adxl345ConfigGetter.cpp"
 )
 
 set(TARGET_LINUX_LIB swing_linux_static)
@@ -44,8 +51,10 @@ include_directories(
 add_executable(${PROJECT_NAME}
   main.cpp
   test_SpiHandler.cpp
-  test_RegisterAccessor.cpp
+  test_RegisterManager.cpp
   test_UartManager.cpp
+  test_AccelerometerHandler.cpp
+  test_Adxl345ConfigGetter.cpp
 
 )
 
