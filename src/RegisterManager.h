@@ -6,8 +6,8 @@
 class RegisterManager : public IRegisterManager {
  public:
    RegisterManager();
-   void setBit(volatile uint8_t &reg, volatile uint8_t bitPosition) override;
-   void clearBit(volatile uint8_t &reg, volatile uint8_t bitPosition) override;
+   void setBit(IRegisterManager::BitField theBitField);
+   void clearBit(IRegisterManager::BitField theBitField);
    uint8_t read8BitRegister(volatile uint8_t &reg) override;
    uint16_t read16BitRegister(volatile uint16_t &reg) override;
 
