@@ -49,7 +49,7 @@ void debug_puts(const char *str)
 
 #define LOGGER_INFO(message)                                                                                                     \
    do {                                                                                                                          \
-      uartManager->transmitString("[INFO] ");                                                                                    \
+      uartManager->transmitString(" [INFO] ");                                                                                   \
       uartManager->transmitString(message);                                                                                      \
       uartManager->transmitString("\n");                                                                                         \
    } while (0)
