@@ -8,3 +8,5 @@ void RegisterManager::clearBit(IRegisterManager::BitField theBitField) { theBitF
 
 uint8_t RegisterManager::read8BitRegister(volatile uint8_t &reg) { return reg; }
 uint16_t RegisterManager::read16BitRegister(volatile uint16_t &reg) { return reg; }
+
+bool isBitSet(IRegisterManager::BitField theBitField) { return (theBitField.targetReg & (1 << theBitField.bitIndex)); }
