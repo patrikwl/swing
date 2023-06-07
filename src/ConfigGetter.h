@@ -9,7 +9,7 @@ class ConfigGetter : public IConfigGetter, public ISpiConfigGetter, public IUart
  public:
    ConfigGetter();
 
-   // Uncategorized configurations
+   // (Uncategorized) configurations
    const IRegisterManager::BitField getLedDataDirectionReg() override;
    const IRegisterManager::BitField getLedPin() override;
 
@@ -21,7 +21,17 @@ class ConfigGetter : public IConfigGetter, public ISpiConfigGetter, public IUart
    const ISpiConfigGetter::SpiFrequency getSckFreqyency() override;
 
    // UART
-   const uint8_t getTxPin() override;
+   const IRegisterManager::BitField getTxPin() override;
+   const IRegisterManager::BitField getTxDataDirectionReg() override;
+   const IRegisterManager::BitField getUartTransmitterEnable() override;
+   const IRegisterManager::BitField getUartDoubleSpeed() override;
+   volatile uint8_t &getUartDataRegister() override;
+   const IRegisterManager::BitField getUartDataRegisterEmpty() override;
+   volatile uint8_t &getBaudRateRegLow() override;
+   volatile uint8_t &getBaudRateRegHigh() override;
+   const IRegisterManager::BitField getUartCharSizeZero() override;
+   const IRegisterManager::BitField getUartCharSizeOne() override;
+   const IRegisterManager::BitField getUartCharSizeTwo() override;
    const IUartConfigGetter::UartBaudRate getBaudRate() override;
    const IUartConfigGetter::UartFrameSize getFrameSize() override;
 
