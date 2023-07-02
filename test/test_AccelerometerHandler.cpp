@@ -4,6 +4,7 @@
 #include "ISpiConfigGetter.h"
 #include "ISpiHandler.h"
 #include "RegisterManager.h"
+#include "logger.h"
 #include <cstdint>
 #include <gtest/gtest.h>
 

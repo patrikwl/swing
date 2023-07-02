@@ -1,15 +1,16 @@
+#ifndef SRC_LOGGER_H
+#define SRC_LOGGER_H
+
 #include "IUartManager.h"
 
-extern IUartManager *uartManager;
-
-#ifdef simu
+#ifdef useSimuLogger
 
 #define special_output_port (*((volatile char *)0x20))
 /* This port corresponds to the "-R 0x22,-" command line option. */
 #define special_input_port (*((volatile char *)0x22))
 /* Poll the specified string out the debug port. */
 
-void debug_puts(const char *str)
+static void debug_puts(const char *str)
 {
    const char *c;
 
@@ -39,7 +40,7 @@ void debug_puts(const char *str)
    } while (0)
 
 #else
-
+extern IUartManager *uartManager;
 #define LOGGER_DEBUG(message)                                                                                                    \
    do {                                                                                                                          \
       uartManager->transmitString("[DEBUG] ");                                                                                   \
@@ -62,3 +63,5 @@ void debug_puts(const char *str)
    } while (0)
 
 #endif
+
+#endif // SRC_LOGGER_H

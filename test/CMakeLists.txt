@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 set(PROJECT_NAME MY_TESTS)
 project(${PROJECT_NAME})
 
+add_compile_definitions(useSimuLogger)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 set(CMAKE_CXX_STANDARD 14)
