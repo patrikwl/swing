@@ -8,6 +8,8 @@ class Adxl345ConfigGetter : public IAdxl345ConfigGetter {
    Adxl345ConfigGetter();
 
    const uint8_t getFifoControlReg() override;
+   const uint8_t getReadWriteBitPos() override;
+   const uint8_t getMultiReadWriteBitPos() override;
 
  private:
 };

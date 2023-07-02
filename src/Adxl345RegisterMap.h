@@ -1,3 +1,5 @@
+#define ReadWriteBit 7;
+#define MultipleReadWriteBit 6;
 #define EVID 0x00 // R 11100101 Device ID
 // 0x1C 0x01 // 1 to 28 Reserved Reserved; do not access
 #define THRESH_TAP 0x1D     // R/W 00000000 Tap threshold

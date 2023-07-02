@@ -42,7 +42,7 @@ int main(void)
    SpiAdapter spiAdapter{&registerManager, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    Adxl345ConfigGetter adxlConfigGetter;
-   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager};
+   AccelerometerHandler acceleratorHandler{&configurations, &adxlConfigGetter, &spiHandler, &registerManager};
    sei();
    volatile char in_char;
    const char *litLed = "motor on";
@@ -54,7 +54,9 @@ int main(void)
       _delay_ms(500);
       acceleratorHandler.setBypassMode();
       registerManager.clearBit(configurations.getLedPin());
-      _delay_ms(5000);
+      // registerManager.clearBit(configurations.getAccelerometerCsPin());
+      _delay_ms(3000);
+      // registerManager.setBit(configurations.getAccelerometerCsPin());
       LOGGER_DEBUG(downLed);
    }
 }
