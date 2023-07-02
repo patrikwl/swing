@@ -4,8 +4,8 @@
 #include <string.h>
 
 AccelerometerHandler::AccelerometerHandler(IAdxl345ConfigGetter *theConfigGetter, ISpiHandler *theSpiHandler,
-                                           IRegisterManager *theRegisterManager, IUartManager *theUartManager)
-    : configGetter(theConfigGetter), spiHandler(theSpiHandler), registerManager(theRegisterManager), uartManager(theUartManager)
+                                           IRegisterManager *theRegisterManager)
+    : configGetter(theConfigGetter), spiHandler(theSpiHandler), registerManager(theRegisterManager)
 {
    // registerManager->setBit(DDRB, configurations.getCsPin());
 }

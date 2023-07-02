@@ -1,7 +1,7 @@
 #ifndef IUARTCONFIGGETTER_H
 #define IUARTCONFIGGETTER_H
 
-#include <stdint.h>
+#include "IRegisterManager.h"
 
 class IUartConfigGetter {
  public:
@@ -12,7 +12,21 @@ class IUartConfigGetter {
 
    enum class UartFrameSize { FiveBit, SixBit, SevenBit, EightBit, NineBit };
 
-   virtual const uint8_t getTxPin() = 0;
+   virtual const IRegisterManager::BitField getTxPin() = 0;
+   virtual const IRegisterManager::BitField getTxDataDirectionReg() = 0;
+   virtual const IRegisterManager::BitField getUartTransmitterEnable() = 0;
+   virtual const IRegisterManager::BitField getUartDoubleSpeed() = 0;
+
+   virtual volatile uint8_t &getBaudRateRegLow() = 0;
+   virtual volatile uint8_t &getBaudRateRegHigh() = 0;
+
+   virtual const IRegisterManager::BitField getUartCharSizeZero() = 0;
+   virtual const IRegisterManager::BitField getUartCharSizeOne() = 0;
+   virtual const IRegisterManager::BitField getUartCharSizeTwo() = 0;
+
+   virtual volatile uint8_t &getUartDataRegister() = 0;
+   virtual const IRegisterManager::BitField getUartDataRegisterEmpty() = 0;
+
    virtual const UartBaudRate getBaudRate() = 0;
    virtual const UartFrameSize getFrameSize() = 0;
 

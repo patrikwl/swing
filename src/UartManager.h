@@ -4,7 +4,7 @@
 #include "IUartAdapter.h"
 #include "IUartManager.h"
 
-class UartManager : IUartManager {
+class UartManager : public IUartManager {
  public:
    UartManager(IUartAdapter *theUartAdapter);
 

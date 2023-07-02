@@ -12,7 +12,7 @@ UartAdapter::UartAdapter(IRegisterManager *theRegisterManager, IUartConfigGetter
 void UartAdapter::init()
 {
    // Enable UART receiver module
-   registerAccessor->setBit(UCSR0B, TXEN0);
+   registerAccessor->setBit(configGetter->getUartTransmitterEnable());
    setCharacterSize();
    setIOPorts();
    setBaudRate();
@@ -22,10 +22,10 @@ void UartAdapter::setBaudRate()
 {
    switch (configGetter->getBaudRate()) {
       case (IUartConfigGetter::UartBaudRate::br115200):
-         registerAccessor->clearBit(UCSR0A, U2X0);
+         registerAccessor->clearBit(configGetter->getUartDoubleSpeed());
          uint16_t ubrrValue = F_CPU / (16UL * 115200) - 1;
-         UBRR0H = (ubrrValue >> 8) & 0xFF;
-         UBRR0L = (ubrrValue)&0xFF;
+         configGetter->getBaudRateRegHigh() = (ubrrValue >> 8) & 0xFF;
+         configGetter->getBaudRateRegLow() = (ubrrValue)&0xFF;
          break;
       defualt:
          break;
@@ -35,17 +35,17 @@ void UartAdapter::setBaudRate()
 void UartAdapter::setIOPorts()
 {
    // Set OI port(s)
-   registerAccessor->setBit(DDRD, configGetter->getTxPin());
-   registerAccessor->setBit(PORTD, configGetter->getTxPin());
+   registerAccessor->setBit(configGetter->getTxDataDirectionReg());
+   registerAccessor->setBit(configGetter->getTxPin());
 }
 
 void UartAdapter::setCharacterSize()
 {
    switch (configGetter->getFrameSize()) {
       case (IUartConfigGetter::UartFrameSize::EightBit):
-         registerAccessor->setBit(UCSR0C, UCSZ00);
-         registerAccessor->setBit(UCSR0C, UCSZ01);
-         registerAccessor->clearBit(UCSR0B, UCSZ02);
+         registerAccessor->setBit(configGetter->getUartCharSizeZero());
+         registerAccessor->setBit(configGetter->getUartCharSizeOne());
+         registerAccessor->clearBit(configGetter->getUartCharSizeTwo());
          break;
       default:
          // not implemented
@@ -55,7 +55,7 @@ void UartAdapter::setCharacterSize()
 
 void UartAdapter::waitForEmptyTransmitBuffer()
 {
-   while (!(UCSR0A & (1 << UDRE0))) {
+   while (!registerAccessor->isBitSet(configGetter->getUartDataRegisterEmpty())) {
    }
 }
-void UartAdapter::putChar(const char &data) { UDR0 = data; }
+void UartAdapter::putChar(const char &data) { configGetter->getUartDataRegister() = data; }
