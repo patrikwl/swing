@@ -5,13 +5,14 @@ project(${PROJECT_NAME})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=x86-64 -mtune=generic")
 
 set(HDRS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.h"
+  "${CMAKE_SOURCE_DIR}/../src/SpiAdapter.h"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.h"
   "${CMAKE_SOURCE_DIR}/../src/RegisterManager.h"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.h"
@@ -24,6 +25,7 @@ set(HDRS
 
 set(SRCS
   # "${CMAKE_SOURCE_DIR}/../include/lcd.c"
+  "${CMAKE_SOURCE_DIR}/../src/SpiAdapter.cpp"
   "${CMAKE_SOURCE_DIR}/../src/SpiHandler.cpp"
   "${CMAKE_SOURCE_DIR}/../src/RegisterManager.cpp"
   "${CMAKE_SOURCE_DIR}/../src/UartManager.cpp"
@@ -55,6 +57,7 @@ add_executable(${PROJECT_NAME}
   test_UartManager.cpp
   test_AccelerometerHandler.cpp
   test_Adxl345ConfigGetter.cpp
+  test_SpiAdapter.cpp
 
 )
 
