@@ -3,13 +3,38 @@
 #include "ISpiConfigGetter.h"
 #include "IUartConfigGetter.h"
 
+// Common
+#define PowerReductionRegister PRR
+#define SpiEnableClock PRSPI
+
 // SPI
-#define SpiAdxlCsPinPort DDRD
+#define SpiAdxlCsDataDirectionRegister DDRB
+#define SpiAdxlCsPinPort PORTB
 #define SpiAdxlCsPin PINB2
+
+#define SpiDataDirectionRegister DDRB
+#define SpiPinPort PORTB
+#define SpiMosiDataDirectionReg DDRB
+#define SpiMisoDataDirecionReg DDRB
+#define SpiSckDataDirectionReg DDRB
 #define SpiMosiPin PINB3
-#define SpiMisoPin 0
+#define SpiMisoPin PINB4
 #define SpiSckPin PINB5
 #define SpiOscDevider ISpiConfigGetter::SpiFrequency::FOSC_2
+
+#define SpiControlRegister SPCR
+#define SpiEnable SPE
+#define SpiMasterSlaveSelect MSTR
+#define SpiClockPolarity CPOL
+#define SpiClockPhase CPHA
+#define SpiClockRateSelectZero SPR0
+#define SpiClockRateSelectOne SPR1
+
+#define SpiStatusReg SPSR
+#define SpiInterruptFlag SPIF
+#define SpiDoubleSpeed SPI2X
+
+#define SpiDataReg SPDR
 
 // UART
 #define UartTxDataDirectionRegister DDRD
