@@ -1,3 +1,7 @@
+#include "IUartManager.h"
+
+extern IUartManager *uartManager;
+
 #ifdef simu
 
 #define special_output_port (*((volatile char *)0x20))
@@ -38,23 +42,23 @@ void debug_puts(const char *str)
 
 #define LOGGER_DEBUG(message)                                                                                                    \
    do {                                                                                                                          \
-      uartManager.transmitString("[DEBUG] ");                                                                                    \
-      uartManager.transmitString(message);                                                                                       \
-      uartManager.transmitString("\n");                                                                                          \
+      uartManager->transmitString("[DEBUG] ");                                                                                   \
+      uartManager->transmitString(message);                                                                                      \
+      uartManager->transmitString("\n");                                                                                         \
    } while (0)
 
 #define LOGGER_INFO(message)                                                                                                     \
    do {                                                                                                                          \
-      uartManager.transmitString("[INFO] ");                                                                                     \
-      uartManager.transmitString(message);                                                                                       \
-      uartManager.transmitString("\n");                                                                                          \
+      uartManager->transmitString(" [INFO] ");                                                                                   \
+      uartManager->transmitString(message);                                                                                      \
+      uartManager->transmitString("\n");                                                                                         \
    } while (0)
 
 #define LOGGER_ERROR(message)                                                                                                    \
    do {                                                                                                                          \
-      uartManager.transmitString("[ERROR] ");                                                                                    \
-      uartManager.transmitString(message);                                                                                       \
-      uartManager.transmitString("\n");                                                                                          \
+      uartManager->transmitString("[ERROR] ");                                                                                   \
+      uartManager->transmitString(message);                                                                                      \
+      uartManager->transmitString("\n");                                                                                         \
    } while (0)
 
 #endif

@@ -24,32 +24,37 @@ ISR(INT1_vect)
    _delay_ms(1000);
 }
 
+// TODO fixa register-bitPost struct i hela projektet
+// TODO uppdatera alla confGetters see: "volatile uint8_t &getCsPortRegister() override;""
+// TODO unittest för adapters efter ovan
+// TODO Kolla reg MCUCR om pull-up/down inte behövs
+// TODO Fixa en logger class som ligger i global istället för att exponera uartManager
+
+IUartManager *uartManager;
 int main(void)
 {
    RegisterManager registerManager;
    ConfigGetter configurations;
    UartAdapter uartAdapter{&registerManager, &configurations};
-   UartManager uartManager{&uartAdapter};
+   UartManager uartManagerInstance(&uartAdapter);
+   uartManager = &uartManagerInstance;
+
    SpiAdapter spiAdapter{&registerManager, &configurations};
    SpiHandler spiHandler{&spiAdapter};
    Adxl345ConfigGetter adxlConfigGetter;
-   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager, &uartManager};
-
+   AccelerometerHandler acceleratorHandler{&adxlConfigGetter, &spiHandler, &registerManager};
    sei();
    volatile char in_char;
    const char *litLed = "motor on";
    const char *downLed = "motor off";
-   char buffer[32];
-   int testDataToSebnd = 1337;
-   sprintf(buffer, "ALO %u", testDataToSebnd);
-   // LOGGER_DEBUG("message");
-   registerManager.setBit(DDRB, PB0);
+   registerManager.setBit(configurations.getLedDataDirectionReg());
    while (1) {
-      registerAccessor.setBit(PORTB, PB0);
+      registerManager.setBit(configurations.getLedPin());
       LOGGER_DEBUG(litLed);
       _delay_ms(500);
-      LOGGER_DEBUG(downLed);
-      registerAccessor.clearBit(PORTB, PB0);
+      acceleratorHandler.setBypassMode();
+      registerManager.clearBit(configurations.getLedPin());
       _delay_ms(5000);
+      LOGGER_DEBUG(downLed);
    }
 }
