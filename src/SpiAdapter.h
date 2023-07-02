@@ -15,7 +15,7 @@ class SpiAdapter : public ISpiAdapter {
    void init();
    void setSckRate();
    void setIOPorts();
-   IRegisterManager *registerAccessor{nullptr};
+   IRegisterManager *registerManager{nullptr};
    ISpiConfigGetter *confGetter{nullptr};
 };
 
