@@ -1,5 +1,5 @@
 #include "RegisterManager.h"
-#include "src/IRegisterManager.h"
+// #include "src/IRegisterManager.h"
 #include <gtest/gtest.h>
 
 class TestRegisterManager : public ::testing::Test {
@@ -46,7 +46,7 @@ TEST_F(TestRegisterManager, itSeesASetbit)
 
 TEST_F(TestRegisterManager, expectedResult)
 {
-   bool expectedResult = true;
+   bool expectedResult = false;
    IRegisterManager::BitField bitField(TestRegister, 3);
 
    bool testResult = accessor.isBitSet(bitField);

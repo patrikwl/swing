@@ -14,11 +14,30 @@ class ConfigGetter : public IConfigGetter, public ISpiConfigGetter, public IUart
    const IRegisterManager::BitField getLedPin() override;
 
    // SPI
-   const uint8_t getCsPin() override;
-   const uint8_t getMosiPin() override;
-   const uint8_t getMisoPin() override;
-   const uint8_t getSckPin() override;
+   const IRegisterManager::BitField getAccelerometerCsPin() override;
+   const IRegisterManager::BitField getAccelerometerCsDataDirectionReg() override;
+
+   const IRegisterManager::BitField getMosiPin() override;
+   const IRegisterManager::BitField getMisoPin() override;
+   const IRegisterManager::BitField getSckPin() override;
+   const IRegisterManager::BitField getMosiDataDirectionReg() override;
+   const IRegisterManager::BitField getMisoDataDirectionReg() override;
+   const IRegisterManager::BitField getSckDataDirectionReg() override;
+
    const ISpiConfigGetter::SpiFrequency getSckFreqyency() override;
+   const IRegisterManager::BitField getClockEnabler() override;
+
+   const IRegisterManager::BitField getControlReg() override;
+   const IRegisterManager::BitField getSpiEnable() override;
+   const IRegisterManager::BitField getMasterSlaveSelect() override;
+   const IRegisterManager::BitField getClockPolarity() override;
+   const IRegisterManager::BitField getClockPhase() override;
+   const IRegisterManager::BitField getClockRateSelectZero() override;
+   const IRegisterManager::BitField getClockRateSelectOne() override;
+
+   const IRegisterManager::BitField getInterruptFlag() override;
+   const IRegisterManager::BitField getDoubleSpeed() override;
+   volatile uint8_t &getDataReg() override;
 
    // UART
    const IRegisterManager::BitField getTxPin() override;
