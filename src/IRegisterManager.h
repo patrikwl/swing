@@ -6,9 +6,9 @@
 class IRegisterManager {
  public:
    struct BitField {
+      BitField(volatile uint8_t &theReg, uint8_t index) : targetReg(theReg), bitIndex(index) {}
       volatile uint8_t &targetReg;
       uint8_t bitIndex;
-      BitField(volatile uint8_t &theReg, uint8_t index) : targetReg(theReg), bitIndex(index) {}
    };
 
    virtual void setBit(IRegisterManager::BitField theBitField) = 0;
